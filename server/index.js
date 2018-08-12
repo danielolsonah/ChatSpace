@@ -1,5 +1,6 @@
 const express = require('express');
 const socket = require('socket.io');
+const db = require('../database/index.js');
 
 const app = express();
 
@@ -14,3 +15,11 @@ const io = socket(server);
 io.on('connection', (socket) => {
 	console.log('Now connected to socket...')
 });
+
+db.connect()
+.then(() => {
+	console.log('Connected to database...');
+})
+.catch(err => {
+	console.log('PG connection error:\n', err);
+})

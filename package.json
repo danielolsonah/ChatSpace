@@ -19,6 +19,7 @@
   "homepage": "https://github.com/danielolsonah/ChatSpace#readme",
   "dependencies": {
     "express": "^4.16.3",
+    "pg": "^7.4.3",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",
