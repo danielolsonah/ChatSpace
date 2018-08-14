@@ -3,3 +3,9 @@ export const login = () => {
 		type: 'LOG_IN'
 	}
 }
+
+export const alertUsernameTaken = () => {
+	return {
+		type: 'USERNAME_TAKEN'
+	}
+}

@@ -7,7 +7,17 @@ const createUser = (username, password) => {
 			(username, password) 
 			VALUES 
 			('${username}', '${password}')
-			`)
+	`);
+}
+
+const checkForUser = (username) => {
+	return db.query(`
+			SELECT FROM
+			users
+			WHERE
+			username='${username}'
+	`);
 }
 
 module.exports.createUser = createUser;
+module.exports.checkForUser = checkForUser;

@@ -30,13 +30,23 @@ db.connect()
 
 app.post('/createuser', (req, res) => {
 	console.log(req.body)
-	dbHelpers.createUser(req.body.username, req.body.password)
+	// dbHelpers.createUser(req.body.username, req.body.password)
+	// .then(results => {
+	// 	console.log(results);
+	// 	res.status(201).send(results);
+	// })
+	// .catch(err => {
+	// 	console.log(err);
+	// 	res.status(400).send(err);
+	// })
+	dbHelpers.checkForUser(req.body.username)
 	.then(results => {
 		console.log(results);
-		res.status(201).send(results);
+		if (results.rowCount !== 0) {
+			res.status(200).send('TAKEN')
+		}
 	})
 	.catch(err => {
 		console.log(err);
-		res.status(400).send(err);
 	})
 })

@@ -1,5 +1,6 @@
 const coolState = {
 	loginPage: true,
+	usernameTaken: false,
 	homePage: false,
 	username: null,
 	profilePicUrl: null,
@@ -14,6 +15,11 @@ const reducer = (state = coolState, action) => {
 				...state,
 				loginPage: false,
 				homePage: true
+			}
+		case 'USERNAME_TAKEN' : 
+			return {
+				...state,
+				usernameTaken: true
 			}
 		default : 
 			return state
