@@ -14,7 +14,8 @@ const reducer = (state = coolState, action) => {
 			return {
 				...state,
 				loginPage: false,
-				homePage: true
+				homePage: true,
+				username: action.payload.username
 			}
 		case 'USERNAME_TAKEN' : 
 			return {

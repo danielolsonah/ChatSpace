@@ -17,8 +17,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		login: () => {
-			dispatch(login());
+		login: (username) => {
+			dispatch(login(username));
 		},
 		alertUsernameTaken: () => {
 			dispatch(alertUsernameTaken());
@@ -45,6 +45,8 @@ class LoginPage extends React.Component {
 			console.log(results);
 			if (results.data === 'TAKEN') {
 				this.props.alertUsernameTaken();
+			} else {
+				this.props.login(this.refs.newUser.value)
 			}
 		})
 		.catch(err => {
@@ -52,7 +54,6 @@ class LoginPage extends React.Component {
 		})
 	}
 	render() {
-		console.log('STATE:', this.props)
 		return (
 			<div>
 				<h1>Create New User</h1>

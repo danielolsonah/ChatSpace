@@ -40,13 +40,24 @@ app.post('/createuser', (req, res) => {
 	// 	res.status(400).send(err);
 	// })
 	dbHelpers.checkForUser(req.body.username)
-	.then(results => {
-		console.log(results);
-		if (results.rowCount !== 0) {
+	.then(userEntry => {
+		console.log(userEntry);
+		if (userEntry.rowCount !== 0) {
 			res.status(200).send('TAKEN')
+		} else {
+			dbHelpers.createUser(req.body.username, req.body.password)
+			.then(results => {
+				console.log(results);
+				res.status(200).send(results);
+			})
+			.catch(err => {
+				console.log(err);
+				res.status(400).send(err);
+			})
 		}
 	})
 	.catch(err => {
 		console.log(err);
+		res.status(400).send(err);	
 	})
 })
