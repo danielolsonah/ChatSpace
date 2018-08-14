@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/danielolsonah/ChatSpace#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "express": "^4.16.3",
     "pg": "^7.4.3",
     "react": "^16.4.2",
