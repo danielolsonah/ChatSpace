@@ -30,15 +30,6 @@ db.connect()
 
 app.post('/createuser', (req, res) => {
 	console.log(req.body)
-	// dbHelpers.createUser(req.body.username, req.body.password)
-	// .then(results => {
-	// 	console.log(results);
-	// 	res.status(201).send(results);
-	// })
-	// .catch(err => {
-	// 	console.log(err);
-	// 	res.status(400).send(err);
-	// })
 	dbHelpers.checkForUser(req.body.username)
 	.then(userEntry => {
 		console.log(userEntry);
@@ -59,5 +50,21 @@ app.post('/createuser', (req, res) => {
 	.catch(err => {
 		console.log(err);
 		res.status(400).send(err);	
+	})
+})
+
+app.post('/login', (req, res) => {
+	console.log('REQUEST BODY:', req.body);
+	dbHelpers.checkPassword(req.body.username)
+	.then(result => {
+		console.log('PASSWORD:', result.rows[0].password);
+		if (result.rows[0].password !== req.body.password) {
+			res.status(201).send('FALSE');
+		} else {
+			res.status(201).send('OK');
+		}
+	})
+	.catch(err => {
+		console.log('LOGIN ERROR:\n', err);
 	})
 })

@@ -12,3 +12,9 @@ export const alertUsernameTaken = () => {
 		type: 'USERNAME_TAKEN'
 	}
 }
+
+export const alertLoginFail = () => {
+	return {
+		type: 'LOGIN_FAIL'
+	}
+}

@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { login, alertUsernameTaken } from '../actions/index.js';
+import { login, alertUsernameTaken, alertLoginFail } from '../actions/index.js';
 import axios from 'axios';
 
 const mapStateToProps = (state) => {
 	return {
 		usernameTaken: state.usernameTaken,
+		loginFailed: state.loginFailed
 	}
 }
 
@@ -16,6 +17,9 @@ const mapDispatchToProps = (dispatch) => {
 		},
 		alertUsernameTaken: () => {
 			dispatch(alertUsernameTaken());
+		},
+		alertLoginFail: () => {
+			dispatch(alertLoginFail());
 		}
 	}
 }
@@ -24,6 +28,7 @@ class LoginPage extends React.Component {
 	constructor(props) {
 		super(props);
 		this.createUser = this.createUser.bind(this);
+		this.userLogin = this.userLogin.bind(this);
 	}
 	createUser() {
 		console.log(this.refs.newUser.value);
@@ -47,6 +52,27 @@ class LoginPage extends React.Component {
 			console.log(err);
 		})
 	}
+	userLogin() {
+		console.log(this.refs.loginUser.value, this.refs.loginPassword.value);
+		axios({
+			method: 'post',
+			url: '/login',
+			data: {
+				username: this.refs.loginUser.value,
+				password: this.refs.loginPassword.value
+			}
+		})
+		.then(result => {
+			if (result.data === 'FALSE') {
+				this.props.alertLoginFail();
+			} else {
+				this.props.login(this.refs.loginUser.value);
+			}
+		})
+		.catch(err => {
+			console.log(err);
+		})
+	}
 	render() {
 		return (
 			<div id='loginPage'>
@@ -61,7 +87,8 @@ class LoginPage extends React.Component {
 				<h1>Log In</h1>
 					<input type='text' id='loginUser' ref='loginUser' placeholder='Username'/><br></br>
 					<input type='text' id='loginPassword' ref='loginPassword' placeholder='Password'/><br></br>
-					<button >Log In</button>
+					{this.props.loginFailed && 'Username or Password incorrect, please try again'}
+					<button onClick={this.userLogin} >Log In</button>
 				</div>
 			</div>
 		)

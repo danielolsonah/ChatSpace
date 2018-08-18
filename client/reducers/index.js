@@ -1,6 +1,7 @@
 const coolState = {
 	loginPage: true,
 	usernameTaken: false,
+	loginFailed: false,
 	username: null,
 	profilePicUrl: null,
 	description: null,
@@ -19,6 +20,11 @@ const reducer = (state = coolState, action) => {
 			return {
 				...state,
 				usernameTaken: true
+			}
+		case 'LOGIN_FAIL' :
+			return {
+				...state,
+				loginFailed: true
 			}
 		default : 
 			return state
