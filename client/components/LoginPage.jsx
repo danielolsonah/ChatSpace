@@ -5,13 +5,7 @@ import axios from 'axios';
 
 const mapStateToProps = (state) => {
 	return {
-		loginPage: state.loginPage,
 		usernameTaken: state.usernameTaken,
-		homePage: state.homePage,
-		username: state.username,
-		profilePicUrl: state.profilePicUrl,
-		description: state.description,
-		friends: state.friends
 	}
 }
 
@@ -55,12 +49,20 @@ class LoginPage extends React.Component {
 	}
 	render() {
 		return (
-			<div>
-				<h1>Create New User</h1>
-				<input type='text' id='newUser' ref='newUser' placeholder='Username'/>
-				{this.props.usernameTaken && 'That username already exists'}
-				<input type='text' id='newPassword' ref='newPassword' placeholder='Password'/>
-				<button onClick={this.createUser}>Create User</button>
+			<div id='loginPage'>
+				<div id='newUserForm'>
+					<h1>Create New User</h1>
+					<input type='text' id='newUser' ref='newUser' placeholder='Username'/><br></br>
+					{this.props.usernameTaken && 'That username already exists'}<br></br>
+					<input type='text' id='newPassword' ref='newPassword' placeholder='Password'/><br></br>
+					<button onClick={this.createUser}>Create User</button>
+				</div>
+				<div id='loginForm'>
+				<h1>Log In</h1>
+					<input type='text' id='loginUser' ref='loginUser' placeholder='Username'/><br></br>
+					<input type='text' id='loginPassword' ref='loginPassword' placeholder='Password'/><br></br>
+					<button >Log In</button>
+				</div>
 			</div>
 		)
 	}

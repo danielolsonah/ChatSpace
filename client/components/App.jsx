@@ -7,11 +7,6 @@ import actions from '../actions/index.js';
 const mapStateToProps = (state) => {
 	return {
 		loginPage: state.loginPage,
-		homePage: state.homePage,
-		username: state.username,
-		profilePicUrl: state.profilePicUrl,
-		description: state.description,
-		friends: state.friends
 	}
 }
 
@@ -29,7 +24,7 @@ class App extends React.Component {
 	}
 	render() {
 		return (
-			<div>
+			<div id='main'>
 				{this.props.loginPage ? <LoginPageContainer /> : <HomePageContainer />}
 			</div>
 		)

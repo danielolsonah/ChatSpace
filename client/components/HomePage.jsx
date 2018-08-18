@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => {
 	return {
-		login: state.login,
 		username: state.username,
 		profilePicUrl: state.profilePicUrl,
 		description: state.description,
@@ -13,7 +12,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-
+		
 	}
 }
 
