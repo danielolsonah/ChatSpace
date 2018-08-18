@@ -1,5 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import ChatRoom from './ChatRoom.jsx'
 
 const mapStateToProps = (state) => {
 	return {
@@ -22,7 +23,10 @@ class HomePage extends React.Component {
 	}
 	render() {
 		return (
-			<h1>Logged In</h1>
+			<div id='homePage'>
+				<ChatRoom />
+				<div id='mainProfile'>PROFILE PLACEHOLDER</div>
+			</div>
 		)
 	}
 }
