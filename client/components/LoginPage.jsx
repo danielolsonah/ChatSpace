@@ -29,6 +29,8 @@ class LoginPage extends React.Component {
 		super(props);
 		this.createUser = this.createUser.bind(this);
 		this.userLogin = this.userLogin.bind(this);
+		this.handleNewUserKeypress = this.handleNewUserKeypress.bind(this);
+		this.handleUserKeypress = this.handleUserKeypress.bind(this);
 	}
 	createUser() {
 		console.log(this.refs.newUser.value);
@@ -37,7 +39,8 @@ class LoginPage extends React.Component {
 			url: '/createuser',
 			data: {
 				username: this.refs.newUser.value,
-				password: this.refs.newPassword.value
+				password: this.refs.newPassword.value,
+				profilePicUrl: 'blank_profile_pic.jpg'
 			}
 		})
 		.then(results => {
@@ -73,20 +76,30 @@ class LoginPage extends React.Component {
 			console.log(err);
 		})
 	}
+	handleNewUserKeypress(e) {
+		if (e.key === 'Enter') {
+			this.createUser();
+		}
+	}
+	handleUserKeypress(e) {
+		if (e.key === 'Enter') {
+			this.userLogin();
+		}
+	}
 	render() {
 		return (
 			<div id='loginPage'>
 				<div id='newUserForm'>
 					<h1>Create New User</h1>
-					<input type='text' id='newUser' ref='newUser' placeholder='Username'/><br></br>
+					<input type='text' id='newUser' ref='newUser' placeholder='Username' onKeyPress={this.handleNewUserKeypress} /><br></br>
 					{this.props.usernameTaken && 'That username already exists'}<br></br>
-					<input type='text' id='newPassword' ref='newPassword' placeholder='Password'/><br></br>
+					<input type='text' id='newPassword' ref='newPassword' placeholder='Password' onKeyPress={this.handleNewUserKeypress} /><br></br>
 					<button onClick={this.createUser}>Create User</button>
 				</div>
 				<div id='loginForm'>
 				<h1>Log In</h1>
-					<input type='text' id='loginUser' ref='loginUser' placeholder='Username'/><br></br>
-					<input type='text' id='loginPassword' ref='loginPassword' placeholder='Password'/><br></br>
+					<input type='text' id='loginUser' ref='loginUser' placeholder='Username' onKeyPress={this.handleUserKeypress} /><br></br>
+					<input type='text' id='loginPassword' ref='loginPassword' placeholder='Password' onKeyPress={this.handleUserKeypress} /><br></br>
 					{this.props.loginFailed && 'Username or Password incorrect, please try again'}
 					<button onClick={this.userLogin} >Log In</button>
 				</div>

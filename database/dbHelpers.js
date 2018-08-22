@@ -4,9 +4,9 @@ const createUser = (username, password) => {
 	return db.query(`
 			INSERT INTO 
 			users 
-			(username, password) 
+			(username, password, profilePicUrl) 
 			VALUES 
-			('${username}', '${password}')
+			('${username}', '${password}', 'blank_profile_pic.jpg')
 	`);
 }
 

@@ -26,7 +26,7 @@ class HomePage extends React.Component {
 			<div id='homePage'>
 				<ChatRoom />
 				<div id='mainProfile'>
-					<img src='blank_profile.pic.png' />
+					<img src={this.props.profilePicUrl} />
 				</div>
 			</div>
 		)

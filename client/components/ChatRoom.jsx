@@ -16,6 +16,7 @@ socket.on('chat', data => {
 const mapStateToProps = (state) => {
 	return {
 		username: state.username,
+		profilePicUrl: state.profilePicUrl,
 		chats: state.chats
 	}
 }
@@ -32,12 +33,19 @@ class ChatRoom extends React.Component {
 	constructor(props) {
 		super(props);
 		this.handleClick = this.handleClick.bind(this);
+		this.handleChatKeyPress = this.handleChatKeyPress.bind(this);
 	}
 	handleClick() {
 		socket.emit('chat', {
 			username: this.props.username,
 			message: this.refs.chatInput.value
 		})
+		this.refs.chatInput.value = '';
+	}
+	handleChatKeyPress(e) {
+		if (e.key === 'Enter') {
+			this.handleClick();
+		}
 	}
 	render() {
 		return (
@@ -45,11 +53,17 @@ class ChatRoom extends React.Component {
 			 	CHAT PLACEHOLDER
 				<div id='chatDisplay'>
 					{this.props.chats.map(chat => (
-						<div className='chatEntry'><img className='chatPic' src={this.props.profilePicUrl} /><strong>{chat.username}:</strong> {chat.message}</div>
+						<div className='chatEntry'>
+							<img className='chatPic' src={this.props.profilePicUrl} />
+							<span className='chatMessage'>
+								<strong>{chat.username}:</strong> 
+								{chat.message}
+							</span>
+						</div>
 					))}
 				</div>
 				<div id='chatForm'>
-					<input type='text' id='chatInput' ref='chatInput' />
+					<input type='text' id='chatInput' ref='chatInput' onKeyPress={this.handleChatKeyPress} />
 					<button onClick={this.handleClick} >Send</button>
 				</div>
 			</div>
