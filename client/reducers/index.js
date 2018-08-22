@@ -3,9 +3,10 @@ const coolState = {
 	usernameTaken: false,
 	loginFailed: false,
 	username: null,
-	profilePicUrl: null,
+	profilePicUrl: 'blank_profile_pic.jpg',
 	description: null,
-	friends: []
+	friends: [],
+	chats: []
 }
 
 const reducer = (state = coolState, action) => {
@@ -25,6 +26,11 @@ const reducer = (state = coolState, action) => {
 			return {
 				...state,
 				loginFailed: true
+			}
+		case 'SEND_CHAT' :
+			return {
+				...state,
+				chats: state.chats.concat({username: action.payload.username, message: action.payload.message})
 			}
 		default : 
 			return state

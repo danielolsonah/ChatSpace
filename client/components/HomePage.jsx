@@ -25,7 +25,9 @@ class HomePage extends React.Component {
 		return (
 			<div id='homePage'>
 				<ChatRoom />
-				<div id='mainProfile'>PROFILE PLACEHOLDER</div>
+				<div id='mainProfile'>
+					<img src='blank_profile.pic.png' />
+				</div>
 			</div>
 		)
 	}

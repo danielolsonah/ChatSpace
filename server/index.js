@@ -17,7 +17,11 @@ const server = app.listen(1337, () => {
 const io = socket(server);
 
 io.on('connection', (socket) => {
-	console.log('Now connected to socket...')
+	console.log('Now connected to socket...');
+	socket.on('chat', data => {
+		console.log('DATA:', data)
+		io.sockets.emit('chat', data);
+	})
 });
 
 db.connect()

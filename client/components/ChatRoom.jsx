@@ -1,6 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { sendChat } from '../actions/index.js';
+import store from '../store/index.js'
+const socket = io.connect('http://localhost:1337');
+
+socket.on('connection', socket => {
+	console.log('Connected to socket')
+})
+
+socket.on('chat', data => {
+	console.log('Chat:', data)
+	store.dispatch(sendChat(data.username, data.message));
+})
 
 const mapStateToProps = (state) => {
 	return {
@@ -23,7 +34,10 @@ class ChatRoom extends React.Component {
 		this.handleClick = this.handleClick.bind(this);
 	}
 	handleClick() {
-		this.props.sendChat(this.props.username, this.refs.chatInput.value)
+		socket.emit('chat', {
+			username: this.props.username,
+			message: this.refs.chatInput.value
+		})
 	}
 	render() {
 		return (
@@ -31,7 +45,7 @@ class ChatRoom extends React.Component {
 			 	CHAT PLACEHOLDER
 				<div id='chatDisplay'>
 					{this.props.chats.map(chat => (
-						<div className='chatEntry'><strong>{chat.username}:</strong> {chat.message}</div>
+						<div className='chatEntry'><img className='chatPic' src={this.props.profilePicUrl} /><strong>{chat.username}:</strong> {chat.message}</div>
 					))}
 				</div>
 				<div id='chatForm'>

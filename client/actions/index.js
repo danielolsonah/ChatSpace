@@ -18,3 +18,13 @@ export const alertLoginFail = () => {
 		type: 'LOGIN_FAIL'
 	}
 }
+
+export const sendChat = (username, message) => {
+	return {
+		type: 'SEND_CHAT',
+		payload: {
+			username: username,
+			message: message
+		}
+	}
+}
