@@ -28,3 +28,13 @@ export const sendChat = (username, message) => {
 		}
 	}
 }
+
+export const loadProfile = (profilePicUrl, description) => {
+	return {
+		type: 'LOAD_PROFILE',
+		payload: {
+			profilePicUrl: profilePicUrl,
+			description: description
+		}
+	}
+}

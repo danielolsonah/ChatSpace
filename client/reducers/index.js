@@ -32,6 +32,13 @@ const reducer = (state = coolState, action) => {
 				...state,
 				chats: state.chats.concat({username: action.payload.username, message: action.payload.message})
 			}
+		case 'LOAD_PROFILE' : 
+			console.log('this should be....', action.payload.profilePicUrl);
+			return {
+				...state,
+				profilePicUrl: action.payload.profilePicUrl,
+				description: action.payload.description
+			}
 		default : 
 			return state
 	}

@@ -28,6 +28,16 @@ const checkPassword = (username) => {
 	`)
 }
 
+const fetchProfile = (username) => {
+	return db.query(`
+			SELECT profilePicUrl, description FROM
+			users
+			WHERE
+			username='${username}'
+	`)
+}
+
 module.exports.createUser = createUser;
 module.exports.checkForUser = checkForUser;
 module.exports.checkPassword = checkPassword;
+module.exports.fetchProfile = fetchProfile;

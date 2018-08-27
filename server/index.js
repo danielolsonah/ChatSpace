@@ -84,3 +84,15 @@ app.post('/login', (req, res) => {
 		res.status(404).send(err);
 	})
 })
+
+app.get('/profile/:username', (req, res) => {
+	dbHelpers.fetchProfile(req.params.username)
+	.then(results => {
+		console.log('Profile:', results.rows[0])
+		res.status(200).send(results.rows[0]);
+	})
+	.catch(err => {
+		console.log('Fetch error:', err)
+		res.status(404).send(err);
+	})
+})

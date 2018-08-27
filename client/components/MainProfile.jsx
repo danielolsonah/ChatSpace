@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { loadProfile } from '../actions/index.js';
+import axios from 'axios';
 
 const mapStateToProps = (state) => {
 	return {
@@ -9,12 +11,33 @@ const mapStateToProps = (state) => {
 	}
 }
 
+const mapDispatchToProps = (dispatch) => {
+	return {
+		loadProfile: (profilePicUrl, description) => {
+			dispatch(loadProfile(profilePicUrl, description));
+		}
+	}
+}
 
 class MainProfile extends React.Component {
 	constructor(props) {
 		super(props);
 	}
+	componentDidMount() {
+		axios({
+			method: 'get',
+			url: `/profile/${this.props.username}`
+		})
+		.then(results => {
+			console.log('Profile pic:', results.data)
+			this.props.loadProfile(results.data.profilepicurl, results.data.description);
+		})
+		.catch(err => {
+			console.log('Fetch error:', err);
+		})
+	}
 	render() {
+		console.log('PICTURE:', this.props.profilePicUrl)
 		return (
 			<div id='mainProfile'>
 				<div id='profileTitle'>
@@ -31,6 +54,6 @@ class MainProfile extends React.Component {
 	}
 }
 
-const MainProfileContainer = connect(mapStateToProps)(MainProfile);
+const MainProfileContainer = connect(mapStateToProps, mapDispatchToProps)(MainProfile);
 
 export default MainProfileContainer;
