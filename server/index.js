@@ -59,16 +59,28 @@ app.post('/createuser', (req, res) => {
 
 app.post('/login', (req, res) => {
 	console.log('REQUEST BODY:', req.body);
-	dbHelpers.checkPassword(req.body.username)
+	dbHelpers.checkForUser(req.body.username)
 	.then(result => {
-		console.log('PASSWORD:', result.rows[0].password);
-		if (result.rows[0].password !== req.body.password) {
-			res.status(201).send('FALSE');
+		if (result.rowCount !== 0) {
+			dbHelpers.checkPassword(req.body.username)
+			.then(result => {
+				console.log('PASSWORD:', result.rows[0].password);
+				if (result.rows[0].password !== req.body.password) {
+					res.status(201).send('FALSE');
+				} else {
+					res.status(201).send('OK');
+				}
+			})
+			.catch(err => {
+				console.log('Password check error:\n', err);
+				res.status(404).send(err);
+			})		
 		} else {
-			res.status(201).send('OK');
+			res.status(201).send('FALSE');
 		}
 	})
 	.catch(err => {
-		console.log('LOGIN ERROR:\n', err);
+		console.log('User check error:\n', err);
+		res.status(404).send(err);
 	})
 })

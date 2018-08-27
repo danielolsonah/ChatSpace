@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ChatRoom from './ChatRoom.jsx'
+import ChatRoom from './ChatRoom.jsx';
+import MainProfile from './MainProfile.jsx';
 
 const mapStateToProps = (state) => {
 	return {
@@ -25,9 +26,7 @@ class HomePage extends React.Component {
 		return (
 			<div id='homePage'>
 				<ChatRoom />
-				<div id='mainProfile'>
-					<img src={this.props.profilePicUrl} />
-				</div>
+				<MainProfile />
 			</div>
 		)
 	}
