@@ -4,9 +4,11 @@ const coolState = {
 	loginFailed: false,
 	username: null,
 	profilePicUrl: 'blank_profile_pic.jpg',
+	avatars: ['https://i.imgur.com/aCz0r5x.jpg', 'https://i.imgur.com/m9IFlUT.jpg', 'https://i.imgur.com/YC5NLMA.jpg', 'https://i.imgur.com/vjnP9QV.jpg', 'https://i.imgur.com/K4fCiqv.jpg', 'https://i.imgur.com/Y7T9gJr.png'],
 	description: null,
 	friends: [],
-	chats: []
+	chats: [],
+	typing: null
 }
 
 const reducer = (state = coolState, action) => {
@@ -38,6 +40,16 @@ const reducer = (state = coolState, action) => {
 				...state,
 				profilePicUrl: action.payload.profilePicUrl,
 				description: action.payload.description
+			}
+		case 'TYPING' : 
+			return {
+				...state,
+				typing: action.payload.username
+			}
+		case 'STOP_TYPING' : 
+			return {
+				...state,
+				typing: null
 			}
 		default : 
 			return state

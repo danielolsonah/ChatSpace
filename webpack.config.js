@@ -12,6 +12,11 @@ module.exports = {
 			query: {
 				presets: ['react', 'stage-3']
 			}
-		}]
+		},
+		{
+			test: /\.css?/,
+			loader: 'style-loader!css-loader'
+		}
+		]
 	}
 }

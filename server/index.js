@@ -22,6 +22,9 @@ io.on('connection', (socket) => {
 		console.log('DATA:', data)
 		io.sockets.emit('chat', data);
 	})
+	socket.on('typing', data => {
+		socket.broadcast.emit('typing', data);
+	})
 });
 
 db.connect()

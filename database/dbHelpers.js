@@ -37,7 +37,17 @@ const fetchProfile = (username) => {
 	`)
 }
 
+const uploadPhoto = (username, URL) => {
+	return db.query(`
+			UPDATE users
+			set profilePicUrl = '${URL}'
+			WHERE
+			username = '${username}'
+		`)
+}
+
 module.exports.createUser = createUser;
 module.exports.checkForUser = checkForUser;
 module.exports.checkPassword = checkPassword;
 module.exports.fetchProfile = fetchProfile;
+module.exports.uploadPhoto = uploadPhoto;

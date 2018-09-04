@@ -43,7 +43,7 @@ class MainProfile extends React.Component {
 				<div id='profileTitle'>
 					{this.props.username}
 				</div>
-				<img id='profilePic' src={this.props.profilePicUrl} />
+				<img id='profilePic' src={this.props.profilePicUrl} /> 
 				<div id='description'>
 					<p>{this.props.description}</p>
 				</div>

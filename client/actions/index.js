@@ -38,3 +38,18 @@ export const loadProfile = (profilePicUrl, description) => {
 		}
 	}
 }
+
+export const typing = username => {
+	return {
+		type: 'TYPING',
+		payload: {
+			username: username
+		}
+	}
+}
+
+export const stopTyping = () => {
+	return {
+		type: 'STOP_TYPING'
+	}
+}
