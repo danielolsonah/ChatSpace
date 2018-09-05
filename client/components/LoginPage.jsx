@@ -39,8 +39,7 @@ class LoginPage extends React.Component {
 			url: '/createuser',
 			data: {
 				username: this.refs.newUser.value,
-				password: this.refs.newPassword.value,
-				profilePicUrl: 'blank_profile_pic.jpg'
+				password: this.refs.newPassword.value
 			}
 		})
 		.then(results => {
@@ -91,7 +90,7 @@ class LoginPage extends React.Component {
 			<div id='loginPage'>
 				<div id='newUserForm'>
 					<h1>Create New User</h1>
-					<input type='text' id='newUser' ref='newUser' placeholder='Username' onKeyPress={this.handleNewUserKeypress} /><br></br>
+					<input type='text' id='newUser' ref='newUser' placeholder='Username' onKeyPress={this.handleNewUserKeypress} />
 					{this.props.usernameTaken && 'That username already exists'}<br></br>
 					<input type='text' id='newPassword' ref='newPassword' placeholder='Password' onKeyPress={this.handleNewUserKeypress} /><br></br>
 					<button onClick={this.createUser}>Create User</button>

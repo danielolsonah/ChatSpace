@@ -9,7 +9,8 @@ const mapStateToProps = (state) => {
 		username: state.username,
 		profilePicUrl: state.profilePicUrl,
 		description: state.description,
-		friends: state.friends
+		friends: state.friends,
+		selectorOpen: state.selectorOpen
 	}
 }
 
@@ -26,7 +27,7 @@ class HomePage extends React.Component {
 	render() {
 		return (
 			<div id='homePage'>
-				<AvatarSelector />
+				{this.props.selectorOpen && <AvatarSelector />}
 				<ChatRoom />
 				<MainProfile />
 			</div>

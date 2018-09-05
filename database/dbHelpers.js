@@ -6,7 +6,7 @@ const createUser = (username, password) => {
 			users 
 			(username, password, profilePicUrl) 
 			VALUES 
-			('${username}', '${password}', 'blank_profile_pic.jpg')
+			('${username}', '${password}', null)
 	`);
 }
 
@@ -37,7 +37,7 @@ const fetchProfile = (username) => {
 	`)
 }
 
-const uploadPhoto = (username, URL) => {
+const setAvatar = (username, URL) => {
 	return db.query(`
 			UPDATE users
 			set profilePicUrl = '${URL}'
@@ -50,4 +50,4 @@ module.exports.createUser = createUser;
 module.exports.checkForUser = checkForUser;
 module.exports.checkPassword = checkPassword;
 module.exports.fetchProfile = fetchProfile;
-module.exports.uploadPhoto = uploadPhoto;
+module.exports.setAvatar = setAvatar;

@@ -19,12 +19,13 @@ export const alertLoginFail = () => {
 	}
 }
 
-export const sendChat = (username, message) => {
+export const sendChat = (username, url, message) => {
 	return {
 		type: 'SEND_CHAT',
 		payload: {
 			username: username,
-			message: message
+			message: message,
+			url: url
 		}
 	}
 }
@@ -51,5 +52,20 @@ export const typing = username => {
 export const stopTyping = () => {
 	return {
 		type: 'STOP_TYPING'
+	}
+}
+
+export const toggleSelector = () => {
+	return {
+		type: 'TOGGLE_SELECTOR'
+	}
+}
+
+export const setAvatar = (avatar) => {
+	return {
+		type: 'SET_AVATAR',
+		payload: {
+			profilepicurl: avatar
+		}
 	}
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { loadProfile } from '../actions/index.js';
+import { loadProfile, toggleSelector } from '../actions/index.js';
 import axios from 'axios';
 
 const mapStateToProps = (state) => {
@@ -15,6 +15,9 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		loadProfile: (profilePicUrl, description) => {
 			dispatch(loadProfile(profilePicUrl, description));
+		},
+		toggleSelector: () => {
+			dispatch(toggleSelector());
 		}
 	}
 }
@@ -42,8 +45,8 @@ class MainProfile extends React.Component {
 			<div id='mainProfile'>
 				<div id='profileTitle'>
 					{this.props.username}
+					<img id='profilePic' src={this.props.profilePicUrl} onClick={this.props.toggleSelector} /> 
 				</div>
-				<img id='profilePic' src={this.props.profilePicUrl} /> 
 				<div id='description'>
 					<p>{this.props.description}</p>
 				</div>

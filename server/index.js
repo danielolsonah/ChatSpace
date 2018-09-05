@@ -99,3 +99,13 @@ app.get('/profile/:username', (req, res) => {
 		res.status(404).send(err);
 	})
 })
+
+app.post('/setAvatar', (req, res) => {
+	dbHelpers.setAvatar(req.body.username, req.body.profilepicurl)
+	.then(results => {
+		res.status(201).send('Success')
+	})
+	.catch(err => {
+		res.status(400).send(err)
+	})
+})

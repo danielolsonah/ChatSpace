@@ -10,7 +10,7 @@ socket.on('connection', socket => {
 
 socket.on('chat', data => {
 	console.log('Chat:', data)
-	store.dispatch(sendChat(data.username, data.message));
+	store.dispatch(sendChat(data.username, data.url, data.message));
 	store.dispatch(stopTyping());
 })
 
@@ -45,6 +45,7 @@ class ChatRoom extends React.Component {
 	handleClick() {
 		socket.emit('chat', {
 			username: this.props.username,
+			url: this.props.profilePicUrl,
 			message: this.refs.chatInput.value
 		})
 		this.refs.chatInput.value = '';
@@ -62,21 +63,20 @@ class ChatRoom extends React.Component {
 	render() {
 		return (
 			<div id='chatRoom'>
-			 	CHAT PLACEHOLDER
 				<div id='chatDisplay'>
 					{this.props.chats.map(chat => (
 						<div className='chatEntry'>
-							<img className='chatPic' src={this.props.profilePicUrl} />
-							<span className='chatMessage'>
+							<img className='chatPic' src={chat.url} />
+							<div className='chatMessage'>
 								<strong>{chat.username}:</strong> 
 								{chat.message}
-							</span>
+							</div>
 						</div>
 					))}
 					{this.props.typing && <p>{this.props.typing} is typing...</p>}
 				</div>
 				<div id='chatForm'>
-					<input type='text' id='chatInput' ref='chatInput' onChange={this.handleChange} onKeyPress={this.handleChatKeyPress} />
+					<input type='text' id='chatInput' placeholder='Type a message...' ref='chatInput' onChange={this.handleChange} onKeyPress={this.handleChatKeyPress} />
 					<button onClick={this.handleClick} >Send</button>
 				</div>
 			</div>
